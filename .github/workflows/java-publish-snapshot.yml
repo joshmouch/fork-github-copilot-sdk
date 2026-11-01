@@ -18,7 +18,7 @@ concurrency:
 jobs:
   resolve-source:
     name: Resolve immutable snapshot source
-    runs-on: ubuntu-latest
+    runs-on: "${{ ('ubuntu-latest') == 'ai-fleet-unrouted' && 'ai-fleet-unrouted' || ('ubuntu-latest') == 'ai-fleet-unrouted-windows' && 'ai-fleet-unrouted-windows' || ('ubuntu-latest') == 'ai-fleet-unrouted-macos' && 'ai-fleet-unrouted-macos' || contains('ubuntu-latest', 'macos') && !contains('ubuntu-latest', 'windows') && !(contains('ubuntu-latest', 'ubuntu') || contains('ubuntu-latest', 'linux') || ('ubuntu-latest') == 'ai-fleet-amd64') && 'ai-fleet-unrouted-macos' || contains('ubuntu-latest', 'windows') && !contains('ubuntu-latest', 'macos') && !(contains('ubuntu-latest', 'ubuntu') || contains('ubuntu-latest', 'linux') || ('ubuntu-latest') == 'ai-fleet-amd64') && !contains('ubuntu-latest', 'arm') && !contains('ubuntu-latest', 'aarch64') && 'ai-fleet-windows' || (contains('ubuntu-latest', 'ubuntu') || contains('ubuntu-latest', 'linux') || ('ubuntu-latest') == 'ai-fleet-amd64') && !contains('ubuntu-latest', 'windows') && !contains('ubuntu-latest', 'macos') && !contains('ubuntu-latest', 'arm') && !contains('ubuntu-latest', 'aarch64') && 'ai-fleet-amd64' || 'ai-fleet-unrouted' }}"
     outputs:
       source_sha: ${{ steps.source.outputs.sha }}
     steps:
@@ -37,7 +37,7 @@ jobs:
   build-linux-arm64-classifier:
     name: Build Linux ARM64 snapshot classifier
     needs: resolve-source
-    runs-on: ubuntu-24.04-arm
+    runs-on: ai-fleet-unrouted
     permissions:
       contents: read
     outputs:
@@ -100,7 +100,7 @@ jobs:
   build-linuxmusl-x64-classifier:
     name: Build Linux musl x64 snapshot classifier
     needs: resolve-source
-    runs-on: ubuntu-latest
+    runs-on: "${{ ('ubuntu-latest') == 'ai-fleet-unrouted' && 'ai-fleet-unrouted' || ('ubuntu-latest') == 'ai-fleet-unrouted-windows' && 'ai-fleet-unrouted-windows' || ('ubuntu-latest') == 'ai-fleet-unrouted-macos' && 'ai-fleet-unrouted-macos' || contains('ubuntu-latest', 'macos') && !contains('ubuntu-latest', 'windows') && !(contains('ubuntu-latest', 'ubuntu') || contains('ubuntu-latest', 'linux') || ('ubuntu-latest') == 'ai-fleet-amd64') && 'ai-fleet-unrouted-macos' || contains('ubuntu-latest', 'windows') && !contains('ubuntu-latest', 'macos') && !(contains('ubuntu-latest', 'ubuntu') || contains('ubuntu-latest', 'linux') || ('ubuntu-latest') == 'ai-fleet-amd64') && !contains('ubuntu-latest', 'arm') && !contains('ubuntu-latest', 'aarch64') && 'ai-fleet-windows' || (contains('ubuntu-latest', 'ubuntu') || contains('ubuntu-latest', 'linux') || ('ubuntu-latest') == 'ai-fleet-amd64') && !contains('ubuntu-latest', 'windows') && !contains('ubuntu-latest', 'macos') && !contains('ubuntu-latest', 'arm') && !contains('ubuntu-latest', 'aarch64') && 'ai-fleet-amd64' || 'ai-fleet-unrouted' }}"
     permissions:
       contents: read
     outputs:
@@ -174,7 +174,7 @@ jobs:
   build-linuxmusl-arm64-classifier:
     name: Build Linux musl ARM64 snapshot classifier
     needs: resolve-source
-    runs-on: ubuntu-24.04-arm
+    runs-on: ai-fleet-unrouted
     permissions:
       contents: read
     outputs:
@@ -248,7 +248,7 @@ jobs:
   build-windows-x64-classifier:
     name: Build Windows x64 snapshot classifier
     needs: resolve-source
-    runs-on: windows-latest
+    runs-on: "${{ ('windows-latest') == 'ai-fleet-unrouted' && 'ai-fleet-unrouted' || ('windows-latest') == 'ai-fleet-unrouted-windows' && 'ai-fleet-unrouted-windows' || ('windows-latest') == 'ai-fleet-unrouted-macos' && 'ai-fleet-unrouted-macos' || contains('windows-latest', 'macos') && !contains('windows-latest', 'windows') && !(contains('windows-latest', 'ubuntu') || contains('windows-latest', 'linux') || ('windows-latest') == 'ai-fleet-amd64') && 'ai-fleet-unrouted-macos' || contains('windows-latest', 'windows') && !contains('windows-latest', 'macos') && !(contains('windows-latest', 'ubuntu') || contains('windows-latest', 'linux') || ('windows-latest') == 'ai-fleet-amd64') && !contains('windows-latest', 'arm') && !contains('windows-latest', 'aarch64') && 'ai-fleet-windows' || (contains('windows-latest', 'ubuntu') || contains('windows-latest', 'linux') || ('windows-latest') == 'ai-fleet-amd64') && !contains('windows-latest', 'windows') && !contains('windows-latest', 'macos') && !contains('windows-latest', 'arm') && !contains('windows-latest', 'aarch64') && 'ai-fleet-amd64' || 'ai-fleet-unrouted' }}"
     permissions:
       contents: read
     outputs:
@@ -309,7 +309,7 @@ jobs:
   build-windows-arm64-classifier:
     name: Build Windows ARM64 snapshot classifier
     needs: resolve-source
-    runs-on: windows-11-arm
+    runs-on: "${{ ('windows-11-arm') == 'ai-fleet-unrouted' && 'ai-fleet-unrouted' || ('windows-11-arm') == 'ai-fleet-unrouted-windows' && 'ai-fleet-unrouted-windows' || ('windows-11-arm') == 'ai-fleet-unrouted-macos' && 'ai-fleet-unrouted-macos' || contains('windows-11-arm', 'macos') && !contains('windows-11-arm', 'windows') && !(contains('windows-11-arm', 'ubuntu') || contains('windows-11-arm', 'linux') || ('windows-11-arm') == 'ai-fleet-amd64') && 'ai-fleet-unrouted-macos' || contains('windows-11-arm', 'windows') && !contains('windows-11-arm', 'macos') && !(contains('windows-11-arm', 'ubuntu') || contains('windows-11-arm', 'linux') || ('windows-11-arm') == 'ai-fleet-amd64') && !contains('windows-11-arm', 'arm') && !contains('windows-11-arm', 'aarch64') && 'ai-fleet-windows' || (contains('windows-11-arm', 'ubuntu') || contains('windows-11-arm', 'linux') || ('windows-11-arm') == 'ai-fleet-amd64') && !contains('windows-11-arm', 'windows') && !contains('windows-11-arm', 'macos') && !contains('windows-11-arm', 'arm') && !contains('windows-11-arm', 'aarch64') && 'ai-fleet-amd64' || 'ai-fleet-unrouted' }}"
     permissions:
       contents: read
     outputs:
@@ -370,7 +370,7 @@ jobs:
   build-darwin-classifier:
     name: Build Darwin snapshot classifier
     needs: resolve-source
-    runs-on: macos-26-agent-runtime
+    runs-on: "${{ ('macos-26-agent-runtime') == 'ai-fleet-unrouted' && 'ai-fleet-unrouted' || ('macos-26-agent-runtime') == 'ai-fleet-unrouted-windows' && 'ai-fleet-unrouted-windows' || ('macos-26-agent-runtime') == 'ai-fleet-unrouted-macos' && 'ai-fleet-unrouted-macos' || contains('macos-26-agent-runtime', 'macos') && !contains('macos-26-agent-runtime', 'windows') && !(contains('macos-26-agent-runtime', 'ubuntu') || contains('macos-26-agent-runtime', 'linux') || ('macos-26-agent-runtime') == 'ai-fleet-amd64') && 'ai-fleet-unrouted-macos' || contains('macos-26-agent-runtime', 'windows') && !contains('macos-26-agent-runtime', 'macos') && !(contains('macos-26-agent-runtime', 'ubuntu') || contains('macos-26-agent-runtime', 'linux') || ('macos-26-agent-runtime') == 'ai-fleet-amd64') && !contains('macos-26-agent-runtime', 'arm') && !contains('macos-26-agent-runtime', 'aarch64') && 'ai-fleet-windows' || (contains('macos-26-agent-runtime', 'ubuntu') || contains('macos-26-agent-runtime', 'linux') || ('macos-26-agent-runtime') == 'ai-fleet-amd64') && !contains('macos-26-agent-runtime', 'windows') && !contains('macos-26-agent-runtime', 'macos') && !contains('macos-26-agent-runtime', 'arm') && !contains('macos-26-agent-runtime', 'aarch64') && 'ai-fleet-amd64' || 'ai-fleet-unrouted' }}"
     permissions:
       contents: read
     outputs:
@@ -433,7 +433,7 @@ jobs:
   build-darwin-x64-classifier:
     name: Build Darwin x64 snapshot classifier
     needs: resolve-source
-    runs-on: macos-15-intel
+    runs-on: "${{ ('macos-15-intel') == 'ai-fleet-unrouted' && 'ai-fleet-unrouted' || ('macos-15-intel') == 'ai-fleet-unrouted-windows' && 'ai-fleet-unrouted-windows' || ('macos-15-intel') == 'ai-fleet-unrouted-macos' && 'ai-fleet-unrouted-macos' || contains('macos-15-intel', 'macos') && !contains('macos-15-intel', 'windows') && !(contains('macos-15-intel', 'ubuntu') || contains('macos-15-intel', 'linux') || ('macos-15-intel') == 'ai-fleet-amd64') && 'ai-fleet-unrouted-macos' || contains('macos-15-intel', 'windows') && !contains('macos-15-intel', 'macos') && !(contains('macos-15-intel', 'ubuntu') || contains('macos-15-intel', 'linux') || ('macos-15-intel') == 'ai-fleet-amd64') && !contains('macos-15-intel', 'arm') && !contains('macos-15-intel', 'aarch64') && 'ai-fleet-windows' || (contains('macos-15-intel', 'ubuntu') || contains('macos-15-intel', 'linux') || ('macos-15-intel') == 'ai-fleet-amd64') && !contains('macos-15-intel', 'windows') && !contains('macos-15-intel', 'macos') && !contains('macos-15-intel', 'arm') && !contains('macos-15-intel', 'aarch64') && 'ai-fleet-amd64' || 'ai-fleet-unrouted' }}"
     permissions:
       contents: read
     outputs:
@@ -506,7 +506,7 @@ jobs:
         build-darwin-classifier,
         build-darwin-x64-classifier,
       ]
-    runs-on: ubuntu-latest
+    runs-on: "${{ ('ubuntu-latest') == 'ai-fleet-unrouted' && 'ai-fleet-unrouted' || ('ubuntu-latest') == 'ai-fleet-unrouted-windows' && 'ai-fleet-unrouted-windows' || ('ubuntu-latest') == 'ai-fleet-unrouted-macos' && 'ai-fleet-unrouted-macos' || contains('ubuntu-latest', 'macos') && !contains('ubuntu-latest', 'windows') && !(contains('ubuntu-latest', 'ubuntu') || contains('ubuntu-latest', 'linux') || ('ubuntu-latest') == 'ai-fleet-amd64') && 'ai-fleet-unrouted-macos' || contains('ubuntu-latest', 'windows') && !contains('ubuntu-latest', 'macos') && !(contains('ubuntu-latest', 'ubuntu') || contains('ubuntu-latest', 'linux') || ('ubuntu-latest') == 'ai-fleet-amd64') && !contains('ubuntu-latest', 'arm') && !contains('ubuntu-latest', 'aarch64') && 'ai-fleet-windows' || (contains('ubuntu-latest', 'ubuntu') || contains('ubuntu-latest', 'linux') || ('ubuntu-latest') == 'ai-fleet-amd64') && !contains('ubuntu-latest', 'windows') && !contains('ubuntu-latest', 'macos') && !contains('ubuntu-latest', 'arm') && !contains('ubuntu-latest', 'aarch64') && 'ai-fleet-amd64' || 'ai-fleet-unrouted' }}"
     defaults:
       run:
         shell: bash
